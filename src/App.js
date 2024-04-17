@@ -1,6 +1,7 @@
 // App.js
 import React, { useState } from 'react';
 import './App.css';
+import ReactModal from 'react-modal';
 
 function App() {
   const [inputs, setInputs] = useState({
@@ -26,6 +27,8 @@ function App() {
     tigreTime: '',
   });
 
+  const [isOpen, setIsOpen] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
@@ -41,12 +44,30 @@ function App() {
     // call the api and update results here
   };
 
+  const handleReset = (e) =>{
+    setInputs({
+      views: '',
+      beams: '',
+      scanResolution: '',
+      sourceDistance: '',
+      detectorDistance: '',
+      detectorWidth: '',
+    });
+
+    setMethods({
+      mlcm: false,
+      astra: false,
+      mirt: false,
+      tigre: false,
+    });
+  }
+
   return (
     <div className="app">
-      <div className="left-section">
-        <form onSubmit={handleSubmit}>
+      <div className="data-input">
+        <form className = "variable-form" onSubmit={handleSubmit}>
           <label>
-            Views:
+            Views: 
             <input
               type="text"
               name="views"
@@ -55,7 +76,7 @@ function App() {
             />
           </label>
           <label>
-            Beams:
+            Beams: 
             <input
               type="text"
               name="beams"
@@ -64,7 +85,7 @@ function App() {
             />
           </label>
           <label>
-            Scan Resolution:
+            Scan Resolution: 
             <input
               type="text"
               name="scanResolution"
@@ -73,7 +94,7 @@ function App() {
             />
           </label>
           <label>
-            Source Distance:
+            Source Distance: 
             <input
               type="text"
               name="sourceDistance"
@@ -82,7 +103,7 @@ function App() {
             />
           </label>
           <label>
-            Detector Distance:
+            Detector Distance: 
             <input
               type="text"
               name="detectorDistance"
@@ -91,62 +112,71 @@ function App() {
             />
           </label>
           <label>
-            Detector Width:
+            Detector Width: 
             <input
               type="text"
-              name="views"
+              name="detectorWidth"
               value={inputs.detectorWidth}
               onChange={handleChange}
             />
           </label>
-          <button type="submit">Calculate</button>
         </form>
       </div>
-      <div className="right-section">
-        <div className="top-section">
-          <label>
-            MLCM Rasterization Algorithim:
-            <input
-              type="checkbox"
-              name="mlcm"
-              checked={methods.mlcm}
-              onChange={handleCheckboxChange}
-            />
-          </label>
-          <label>
-            ASTRA Toolkit:
-            <input
-              type="checkbox"
-              name="astra"
-              checked={methods.astra}
-              onChange={handleCheckboxChange}
-            />
-          </label>
-          <label>
-            MIRT:
-            <input
-              type="checkbox"
-              name="mirt"
-              checked={methods.mirt}
-              onChange={handleCheckboxChange}
-            />
-          </label>
-          <label>
-            TIGRE:
-            <input
-              type="checkbox"
-              name="tigre"
-              checked={methods.tigre}
-              onChange={handleCheckboxChange}
-            />
-          </label>
-        </div>
-        <div className="bottom-section">
-          <p>MLCM Time: {results.mlcmTime}</p>
-          <p>ASTRA Time: {results.astraTime}</p>
-          <p>MIRT Time: {results.mirtTime}</p>
-          <p>TIGRE Time: {results.tigreTime}</p>
-        </div>
+      <div className="technique-input">
+        <label>
+          MLCM Rasterization Algorithim:
+          <input
+            type="checkbox"
+            name="mlcm"
+            checked={methods.mlcm}
+            onChange={handleCheckboxChange}
+          />
+        </label>
+        <label>
+          ASTRA Toolkit:
+          <input
+            type="checkbox"
+            name="astra"
+            checked={methods.astra}
+            onChange={handleCheckboxChange}
+          />
+        </label>
+        <label>
+          MIRT:
+          <input
+            type="checkbox"
+            name="mirt"
+            checked={methods.mirt}
+            onChange={handleCheckboxChange}
+          />
+        </label>
+        <label>
+          TIGRE:
+          <input
+            type="checkbox"
+            name="tigre"
+            checked={methods.tigre}
+            onChange={handleCheckboxChange}
+          />
+        </label>
+      </div>
+      <div className="results-section">
+        <p>MLCM Time: {results.mlcmTime}</p>
+        <p>ASTRA Time: {results.astraTime}</p>
+        <p>MIRT Time: {results.mirtTime}</p>
+        <p>TIGRE Time: {results.tigreTime}</p>
+      </div>
+      <div className='buttons'>
+        <button type="submit" onClick={handleSubmit}>Calculate</button>
+        <button type="about" onClick={() => setIsOpen(true)}>About</button>
+        <ReactModal
+          isOpen={isOpen}
+          contentLabel='about-section'
+          onRequestClose={() => setIsOpen(false)}
+        >
+          Hello we are MLCM and I loveeee to code.
+        </ReactModal>
+        <button type="reset" onClick={handleReset}>Reset</button>
       </div>
     </div>
   );
