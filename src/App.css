@@ -1,17 +1,44 @@
+body {
+  background: linear-gradient(to bottom, #add8e6, #00008b); /* Gradient from light blue to dark blue */
+}
+
 .app {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  min-height: 100vh; 
+  margin: auto;
   border: 2px solid blue;
   padding: 20px;
-  background-color: #f0f8ff; /* light blue */
+  background: linear-gradient(to right, #f0f8ff, #e1f5fe); /* light blue gradient */
+  overflow: auto;
+}
+
+.user-input{
+  display: flex;
+  justify-content: space-between;
 }
 
 .data-input {
   margin: 5px;
+  border: 2px solid black;
+  padding: 20px;
+  font-size: 1.8em;
+  width: 45%;
+}
+.data-input label {
+  display: flex;
+  flex-direction: column;
+}
+.data-input input {
+  margin-top: 5px;
+  width: 25%;
+  height: 15px;
 }
 
 .variable-form{
   display: flex;
   flex-direction: column;
-  border: 2px solid black;
 }
 
 .technique-input{
@@ -19,6 +46,13 @@
   display: flex;
   flex-direction: column;
   border: 2px solid black;
+  padding: 20px;
+  font-size: 1.8em;
+  width: 45%;
+}
+
+.technique-input input{
+  transform: scale(1.5);
 }
 
 .results-section{
@@ -26,16 +60,22 @@
   display: flex;
   flex-direction: column;
   border: 2px solid black;
+  padding: 20px;
+  font-size: 1.8em;
 }
 
+.results-section p{
+  margin: 0;
+}
 
 button {
-  margin-top: 10px;
+  margin-top: 50px;
   padding: 10px 20px;
   background-color: blue;
   color: white;
   border: 2px solid black;
   cursor: pointer;
+  font-size: 2em;
 }
 
 .buttons {
@@ -46,8 +86,4 @@ button {
 
 button:hover {
   background-color: darkblue;
-}
-
-p {
-  margin: 5px 0;
 }

@@ -64,101 +64,103 @@ function App() {
 
   return (
     <div className="app">
-      <div className="data-input">
-        <form className = "variable-form" onSubmit={handleSubmit}>
+      <div className="user-input">
+        <div className="data-input">
+          <form className = "variable-form" onSubmit={handleSubmit}>
+            <label>
+              Views: 
+              <input
+                type="number"
+                name="views"
+                value={inputs.views}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Beams: 
+              <input
+                type="number"
+                name="beams"
+                value={inputs.beams}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Scan Resolution: 
+              <input
+                type="number"
+                name="scanResolution"
+                value={inputs.scanResolution}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Source Distance: 
+              <input
+                type="number"
+                name="sourceDistance"
+                value={inputs.sourceDistance}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Detector Distance: 
+              <input
+                type="number"
+                name="detectorDistance"
+                value={inputs.detectorDistance}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Detector Width: 
+              <input
+                type="number"
+                name="detectorWidth"
+                value={inputs.detectorWidth}
+                onChange={handleChange}
+              />
+            </label>
+          </form>
+        </div>
+        <div className="technique-input">
           <label>
-            Views: 
+            MLCM Rasterization Algorithim:
             <input
-              type="text"
-              name="views"
-              value={inputs.views}
-              onChange={handleChange}
+              type="checkbox"
+              name="mlcm"
+              checked={methods.mlcm}
+              onChange={handleCheckboxChange}
             />
           </label>
           <label>
-            Beams: 
+            ASTRA Toolkit:
             <input
-              type="text"
-              name="beams"
-              value={inputs.beams}
-              onChange={handleChange}
+              type="checkbox"
+              name="astra"
+              checked={methods.astra}
+              onChange={handleCheckboxChange}
             />
           </label>
           <label>
-            Scan Resolution: 
+            MIRT:
             <input
-              type="text"
-              name="scanResolution"
-              value={inputs.scanResolution}
-              onChange={handleChange}
+              type="checkbox"
+              name="mirt"
+              checked={methods.mirt}
+              onChange={handleCheckboxChange}
             />
           </label>
           <label>
-            Source Distance: 
+            TIGRE:
             <input
-              type="text"
-              name="sourceDistance"
-              value={inputs.sourceDistance}
-              onChange={handleChange}
+              type="checkbox"
+              name="tigre"
+              checked={methods.tigre}
+              onChange={handleCheckboxChange}
             />
           </label>
-          <label>
-            Detector Distance: 
-            <input
-              type="text"
-              name="detectorDistance"
-              value={inputs.detectorDistance}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Detector Width: 
-            <input
-              type="text"
-              name="detectorWidth"
-              value={inputs.detectorWidth}
-              onChange={handleChange}
-            />
-          </label>
-        </form>
-      </div>
-      <div className="technique-input">
-        <label>
-          MLCM Rasterization Algorithim:
-          <input
-            type="checkbox"
-            name="mlcm"
-            checked={methods.mlcm}
-            onChange={handleCheckboxChange}
-          />
-        </label>
-        <label>
-          ASTRA Toolkit:
-          <input
-            type="checkbox"
-            name="astra"
-            checked={methods.astra}
-            onChange={handleCheckboxChange}
-          />
-        </label>
-        <label>
-          MIRT:
-          <input
-            type="checkbox"
-            name="mirt"
-            checked={methods.mirt}
-            onChange={handleCheckboxChange}
-          />
-        </label>
-        <label>
-          TIGRE:
-          <input
-            type="checkbox"
-            name="tigre"
-            checked={methods.tigre}
-            onChange={handleCheckboxChange}
-          />
-        </label>
+        </div>
       </div>
       <div className="results-section">
         <p>MLCM Time: {results.mlcmTime}</p>
@@ -174,7 +176,7 @@ function App() {
           contentLabel='about-section'
           onRequestClose={() => setIsOpen(false)}
         >
-          Hello we are MLCM and I loveeee to code.
+          Computed Tomography is an area of medical imaging that utilizies X-rays to take cross-sectional images of patients. This is a non-invasive method doctors can use to assess the internal health of patients. However, 
         </ReactModal>
         <button type="reset" onClick={handleReset}>Reset</button>
       </div>
