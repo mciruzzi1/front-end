@@ -1,58 +1,70 @@
 body {
-  background: linear-gradient(to bottom, #add8e6, #00008b); /* Gradient from light blue to dark blue */
-}
-
-.app {
+  background: linear-gradient(to bottom, #add8e6, #00008b);
   display: flex;
   flex-direction: column;
-  width: 80vw;
-  min-height: 100vh; 
-  margin: auto;
-  border: 2px solid blue;
-  padding: 20px;
-  background: linear-gradient(to right, #f0f8ff, #e1f5fe); /* light blue gradient */
-  overflow: auto;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
+
+.app {
+  /*Note: The width and heigh use vw and vh to be more responsive as the window size changes. However, this application is built for a computer and not a mobile device*/
+  width: 85vw;
+  height: 90vh;
+  border: 2px solid black;
+  background: linear-gradient(to bottom, #f0f8ff, #ffb24d);
+  font-family: 'Times New Roman', Times, serif;
+  font-size: calc(1.2em + 0.7vw);
+}
+
+/*Order the data input and the technique input section so that they can be above the results*/
 .user-input{
   display: flex;
   justify-content: space-between;
 }
 
 .data-input {
+  display: flex;
   margin: 5px;
   border: 2px solid black;
   padding: 20px;
-  font-size: 1.8em;
-  width: 45%;
-}
-.data-input label {
-  display: flex;
-  flex-direction: column;
-}
-.data-input input {
-  margin-top: 5px;
-  width: 25%;
-  height: 15px;
+  width: 55%; /*This will control the size of the border*/
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /*This will create a shadow effect to add more texture to the boxes*/
+  border-radius: 0.5rem;
 }
 
-.variable-form{
+.data-input label {
+  /*Order the boxes so that they are all centered and uniform*/
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+
+.data-input input {
+  font-size: calc(0.6em + 0.3vw); /*I found these values to be the best, but these can be altered as needed*/
+  width: 5vw;
 }
 
 .technique-input{
   margin: 5px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   border: 2px solid black;
   padding: 20px;
-  font-size: 1.8em;
-  width: 45%;
+  width: 40%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+}
+
+.technique-input label {
+  padding: 5px; /*Change this to add more space between the text and the checkbox*/
 }
 
 .technique-input input{
-  transform: scale(1.5);
+  transform: scale(1.7); /*Change this to change the size of the checkbox*/
+  margin: 10px;
 }
 
 .results-section{
@@ -61,29 +73,49 @@ body {
   flex-direction: column;
   border: 2px solid black;
   padding: 20px;
-  font-size: 1.8em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
 }
 
 .results-section p{
   margin: 0;
 }
 
-button {
-  margin-top: 50px;
+.submit_btns{
+  margin-top: 40px; /*change this to add more space between the results section and the three buttons*/
   padding: 10px 20px;
   background-color: blue;
   color: white;
   border: 2px solid black;
   cursor: pointer;
-  font-size: 2em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+  font-size: calc(0.4em + 0.4vw);
 }
 
 .buttons {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 20px;
 }
 
 button:hover {
-  background-color: darkblue;
+  /*Go gators!*/
+  background-color: orange;
+  color: black;
+}
+
+.help-btn{
+  background-color: blue;
+  color: white;
+  border: 2px solid black;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+  margin-left: 10px;
+}
+
+.tooltip {
+  font-size: 0.6em;
 }
