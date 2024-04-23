@@ -1,19 +1,19 @@
 body {
-  background: linear-gradient(to bottom, #add8e6, #00008b);
+  background: linear-gradient(#add8e6, #00008b);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 }
 
 
 .app {
   /*Note: The width and heigh use vw and vh to be more responsive as the window size changes. However, this application is built for a computer and not a mobile device*/
   width: 85vw;
-  height: 90vh;
+  height: 90%;
   border: 2px solid black;
-  background: linear-gradient(to bottom, #f0f8ff, #ffb24d);
+  background: linear-gradient(#f0f8ff, #ffb24d);
   font-family: 'Times New Roman', Times, serif;
   font-size: calc(1.2em + 0.7vw);
 }
@@ -67,6 +67,19 @@ body {
   margin: 10px;
 }
 
+.status-section{
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+}
+
+.status-section p{
+  margin: 0;
+}
 .results-section{
   margin: 5px;
   display: flex;

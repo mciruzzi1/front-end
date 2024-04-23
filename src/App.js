@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import ReactModal from 'react-modal';
 
@@ -66,12 +66,11 @@ function App() {
   //Set the state for the about section
   const [isOpen, setIsOpen] = useState(false);
 
+  const[helpButtonHoverS, setHelpButtonHoverS] = useState(false);
+  const[helpButtonHoverDist, setHelpButtonHoverDist] = useState(false);
+  const[helpButtonHoverDet, setHelpButtonHoverDet] = useState(false);
   const[helpButtonHoverV, setHelpButtonHoverV] = useState(false);
-  const[helpButtonHoverB, setHelpButtonHoverB] = useState(false);
-  const[helpButtonHoverR, setHelpButtonHoverR] = useState(false);
-  const[helpButtonHoverSD, setHelpButtonHoverSD] = useState(false);
-  const[helpButtonHoverDD, setHelpButtonHoverDD] = useState(false);
-  const[helpButtonHoverDW, setHelpButtonHoverDW] = useState(false);
+  const[helpButtonHoverI, setHelpButtonHoverI] = useState(false);
 
   //Change the data values as the user updates them
   const handleDataInput = (e) => {
@@ -154,14 +153,62 @@ function App() {
       <h2>Fanbeam Computed Tomography Forward Model in OpenGL</h2>
       <div className="user-input">
         <div className="data-input">
-          <form className = "variable-form" onSubmit={handleSubmit}>
+          <form className = "data-form" onSubmit={handleCalculate}>
             <label>
-              Views: 
+              Size: 
+              <input
+                type="number"
+                name="size"
+                value={inputs.size}
+                onChange={handleDataInput}
+              />
+              <button className='help-btn'
+              onMouseEnter={() => setHelpButtonHoverS(true)}
+              onMouseLeave={() => setHelpButtonHoverS(false)}
+              >
+                ?
+              </button>
+              {helpButtonHoverS && <div className="tooltip">This modifies the size of the image</div>}
+            </label>
+            <label>
+              Source & Detector Distance: 
+              <input
+                type="number"
+                name="distance"
+                value={inputs.distance}
+                onChange={handleDataInput}
+              />
+              <button className='help-btn'
+              onMouseEnter={() => setHelpButtonHoverDist(true)}
+              onMouseLeave={() => setHelpButtonHoverDist(false)}
+              >
+                ?
+              </button>
+              {helpButtonHoverDist && <div className="tooltip">Distance to the source and detectors</div>}
+            </label>
+            <label>
+              Number of Detectors: 
+              <input
+                type="number"
+                name="detectors"
+                value={inputs.detectors}
+                onChange={handleDataInput}
+              />
+              <button className='help-btn'
+              onMouseEnter={() => setHelpButtonHoverDet(true)}
+              onMouseLeave={() => setHelpButtonHoverDet(false)}
+              >
+                ?
+              </button>
+              {helpButtonHoverDet && <div className="tooltip">Number of detectors</div>}
+            </label>
+            <label>
+              Number of Views Around Image: 
               <input
                 type="number"
                 name="views"
                 value={inputs.views}
-                onChange={handleChange}
+                onChange={handleDataInput}
               />
               <button className='help-btn'
               onMouseEnter={() => setHelpButtonHoverV(true)}
@@ -169,87 +216,30 @@ function App() {
               >
                 ?
               </button>
-              {helpButtonHoverV && <div className="tooltip">This modifies the number of views used</div>}
-            </label>
-            <label>
-              Source & Detector Distance: 
-              <input
-                type="number"
-                name="beams"
-                value={inputs.beams}
-                onChange={handleChange}
-              />
-              <button className='help-btn'
-              onMouseEnter={() => setHelpButtonHoverB(true)}
-              onMouseLeave={() => setHelpButtonHoverB(false)}
-              >
-                ?
-              </button>
-              {helpButtonHoverB && <div className="tooltip">This modifies the number of beams produced</div>}
-            </label>
-            <label>
-              Number of Detectors: 
-              <input
-                type="number"
-                name="scanResolution"
-                value={inputs.scanResolution}
-                onChange={handleChange}
-              />
-              <button className='help-btn'
-              onMouseEnter={() => setHelpButtonHoverR(true)}
-              onMouseLeave={() => setHelpButtonHoverR(false)}
-              >
-                ?
-              </button>
-              {helpButtonHoverR && <div className="tooltip">This modifies the resolution of the image</div>}
-            </label>
-            <label>
-              Number of Views Around Image: 
-              <input
-                type="number"
-                name="sourceDistance"
-                value={inputs.sourceDistance}
-                onChange={handleChange}
-              />
-              <button className='help-btn'
-              onMouseEnter={() => setHelpButtonHoverSD(true)}
-              onMouseLeave={() => setHelpButtonHoverSD(false)}
-              >
-                ?
-              </button>
-              {helpButtonHoverSD && <div className="tooltip">This modifies the distance to the source</div>}
+              {helpButtonHoverV && <div className="tooltip">Number of views around the image</div>}
             </label>
             <label>
               Number of Iterations (average calculation): 
               <input
                 type="number"
-                name="detectorDistance"
-                value={inputs.detectorDistance}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Detector Width: 
-              <input
-                type="number"
-                name="detectorWidth"
-                value={inputs.detectorWidth}
-                onChange={handleChange}
+                name="iterations"
+                value={inputs.iterations}
+                onChange={handleDataInput}
               />
               <button className='help-btn'
-              onMouseEnter={() => setHelpButtonHoverDW(true)}
-              onMouseLeave={() => setHelpButtonHoverDW(false)}
+              onMouseEnter={() => setHelpButtonHoverI(true)}
+              onMouseLeave={() => setHelpButtonHoverI(false)}
               >
                 ?
               </button>
-              {helpButtonHoverDW && <div className="tooltip">This modifies the size of each detector panel</div>}
+              {helpButtonHoverI && <div className="tooltip">For average calculation</div>}
             </label>
           </form>
         </div>
         <div className="technique-input">
           <b>Select Algorithm Type</b>
           <label>
-            MLCM Custom Rasterization Algorithim:
+            MLCM Custom:
             <input
               type="checkbox"
               name="mlcm"
@@ -258,21 +248,21 @@ function App() {
             />
           </label>
           <label>
-            ASTRA CPU (not recommend sizes&gt;512):
+            ASTRA CPU:
             <input
               type="checkbox"
-              name="astra"
-              checked={methods.astra}
-              onChange={handleCheckboxChange}
+              name="astra_cpu"
+              checked={methods.astra_cpu}
+              onChange={handleMethodInput}
             />
           </label>
           <label>
             ASTRA GPU:
             <input
               type="checkbox"
-              name="mirt"
-              checked={methods.mirt}
-              onChange={handleCheckboxChange}
+              name="astra_gpu"
+              checked={methods.astra_gpu}
+              onChange={handleMethodInput}
             />
           </label>
           <label>
@@ -286,8 +276,8 @@ function App() {
           </label>
         </div>
       </div>
-      <div>
-        <h2>Status:</h2>
+      <div className="status-section">
+        <b>Status:</b>
         {statusData.running ? (
           <p>Running!</p>
         ) : (
